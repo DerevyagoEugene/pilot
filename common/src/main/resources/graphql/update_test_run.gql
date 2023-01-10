@@ -1,0 +1,15 @@
+mutation {
+    addEvidenceToTestRun(
+        id: "%TEST_ID%",
+        evidence: [
+            {
+                data: "%DATA%",
+                filename: "logfile.txt",
+                mimeType: "text/plain"
+            }
+        ]
+    ) {
+        addedEvidence
+        warnings
+    }
+}
