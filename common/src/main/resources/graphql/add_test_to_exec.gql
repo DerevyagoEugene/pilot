@@ -1,0 +1,9 @@
+mutation {
+    addTestsToTestExecution(
+        issueId: "%TEST_EXECUTION%",
+        testIssueIds: [%LIST%]
+    ) {
+        addedTests
+        warning
+    }
+}

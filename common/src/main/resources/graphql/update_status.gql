@@ -1,0 +1,6 @@
+mutation {
+    updateTestRunStatus(
+        id: "%ID%",
+        status: "%STATUS%"
+    )
+}
