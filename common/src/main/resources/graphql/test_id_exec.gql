@@ -1,0 +1,75 @@
+{
+    getTestExecution(issueId: "%TEST_EXECUTION%") {
+        issueId
+        jira(fields: ["key"])
+
+        testRuns(limit: 100){
+            results{
+                id
+                status{
+                    name
+                    description
+                }
+                comment
+                testType{
+                    name
+                }
+                evidence{
+                    filename
+                }
+                defects
+                executedById
+                startedOn
+                finishedOn
+                assigneeId
+
+                steps {
+                    id
+                    action
+                    data
+                    result
+                }
+
+                scenarioType
+                gherkin
+                examples {
+                    id
+                    status {
+                        name
+                        description
+                    }
+                    duration
+                }
+
+                unstructured
+
+                customFields {
+                    id
+                    name
+                    values
+                }
+
+                preconditions(limit:10) {
+                    results{
+                        preconditionRef {
+                            issueId
+                            jira(fields: ["key"])
+                        }
+                        definition
+                    }
+                }
+                test {
+                    issueId
+                    jira(fields: ["key"])
+                    projectId
+                    testType {
+                        name
+                        kind
+                    }
+                }
+
+            }
+        }
+
+    }
+}
