@@ -2,3 +2,4 @@
 /common/common.iml
 /tests/tests.iml
 /automated-tests.iml
+*.ppk
