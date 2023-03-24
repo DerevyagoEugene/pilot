@@ -4,7 +4,7 @@ mutation {
         jira: {
             fields: {
                 summary: "%SUMMARY_NAME%",
-                project: {key: "AUT"}
+                project: {key: "BP"}
             }
         }
     ) {

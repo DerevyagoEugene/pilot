@@ -43,9 +43,6 @@ public class FundTransferData {
     @JsonProperty("PromoCode")
     private String promoCode;
 
-    @JsonProperty("PurposeCode")
-    private String purposeCode;
-
     @Override
     public String toString() {
         return "FundTransferData{" +
@@ -61,7 +58,6 @@ public class FundTransferData {
                 ", beneficiary=" + beneficiary +
                 ", myWUNumber='" + myWUNumber + '\'' +
                 ", promoCode='" + promoCode + '\'' +
-                ", purposeCode='" + purposeCode + '\'' +
                 '}';
     }
 }

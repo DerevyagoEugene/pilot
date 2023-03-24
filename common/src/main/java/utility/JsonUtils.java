@@ -19,7 +19,8 @@ public class JsonUtils {
         try {
             return objectMapper.writeValueAsString(object);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            Logger.getInstance().error(e.getMessage());
+            throw new IllegalStateException(e);
         }
     }
 
@@ -27,7 +28,8 @@ public class JsonUtils {
         try {
             return objectMapper.readValue(json, clazz);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            Logger.getInstance().error(e.getMessage());
+            throw new IllegalStateException(e);
         }
     }
 }

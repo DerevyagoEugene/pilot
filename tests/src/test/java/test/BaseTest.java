@@ -6,14 +6,16 @@ import api.SqlClient;
 import api.XrayCloudClient;
 import api.jira.JiraClient;
 import io.qameta.allure.TmsLink;
+import org.picocontainer.DefaultPicoContainer;
+import org.picocontainer.MutablePicoContainer;
 import org.testng.ITestContext;
 import org.testng.ITestNGMethod;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import org.testng.annotations.Ignore;
 import resource.PropertiesManager;
+import stepdefinition.*;
 import utility.Logger;
 import utility.ScenarioContext;
 import java.io.IOException;
@@ -40,6 +42,16 @@ abstract public class BaseTest {
     private final PropertiesManager propertiesManager = new PropertiesManager("xray.properties");
     private final Logger logger = Logger.getInstance();
     private final Map<String, Object> store = ScenarioContext.getInstance();
+    protected final MutablePicoContainer pico = new DefaultPicoContainer();
+
+    protected BaseTest() {
+        pico
+                .addComponent(EVoucherPurchaseSteps.class)
+                .addComponent(CommonSteps.class)
+                .addComponent(FundTransferSteps.class)
+                .addComponent(PaymentSteps.class)
+                .addComponent(RegistrationSteps.class);
+    }
 
     @BeforeMethod
     public void before(Method method) {
@@ -65,11 +77,11 @@ abstract public class BaseTest {
             copyFileTestResourceToTarget(environment, ALLURE_RESULTS_FOLDER + environment);
             copyFileTestResourceToTarget(categories, ALLURE_RESULTS_FOLDER + categories);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            logger.error(e.getMessage());
+            throw new IllegalStateException(e);
         }
     }
 
-    @Ignore
     @AfterSuite(enabled = false)
     public void afterAll(ITestContext context) {
         SqlClient.getInstance().terminate();

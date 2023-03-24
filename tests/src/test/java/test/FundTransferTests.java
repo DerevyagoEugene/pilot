@@ -23,55 +23,41 @@ import static constatnt.Constants.EMPTY;
 @Feature("[CliQ][IPS][Positive]")
 public class FundTransferTests extends BaseTest {
 
-    private final FundTransferSteps fundTransferSteps = new FundTransferSteps();
-    private final CommonSteps commonSteps = new CommonSteps();
-    private final CoreDBSteps dbSteps = new CoreDBSteps();
+    private final FundTransferSteps fundTransferSteps = pico.getComponent(FundTransferSteps.class);
+    private final CommonSteps commonSteps = pico.getComponent(CommonSteps.class);
+    private final CoreDBSteps dbSteps = pico.getComponent(CoreDBSteps.class);
 
     @Test(description = "Successful payment from BaE to BaE accounts")
     @Description("Successful payment from BaE to BaE accounts")
     @TmsLink("MS-10112")
-    @XrayId("10088")
+    @XrayId("10010")
     public void testSuccessfulPaymentFromBaeToBaeAccounts() {
         Customer customer = Customer
                 .builder()
-                .account("0010103438115101")
-                .cif("001034381")
+                .account("0010100027215102")
+                .cif("001000272")
                 .build();
 
         Beneficiary beneficiary = Beneficiary
                 .builder()
-                .name("Mister X")
-                .account("2402300236561101")
-                .bank("BKMEKWKW")
-                .branch(null)
-                .address("UAE")
-                .ultimateDetails("Some details")
-                .eMail("mrx@gmail.com")
-                .phone("+19997778844")
-                .type("Corporate")
-                .build();
-
-        StandingInstruction standingInstruction = StandingInstruction
-                .builder()
-                .startDate("2023-12-12")
-                .endDate("2024-01-31")
-                .isRecurring(true)
-                .frequency("monthly")
-                .every(1L)
-                .daysOfMonth(new Long[] {10L, 12L})
+                .alias("MYNEWALIAS")
+                .aliasType("ALIAS")
                 .build();
 
         FundTransferData fundTransferData = FundTransferData
                 .builder()
-                .chargeType("BEN")
-                .isRecurring(true)
+                .chargeType("our")
+                .additionalDetails(EMPTY)
+                .isRecurring(false)
                 .customer(customer)
-                .amount(100L)
-                .currency("USD")
-                .standingInstruction(standingInstruction)
-                .referenceID(EMPTY)
+                .amount(7L)
+                .currency("JOD")
+                .standingInstruction(new StandingInstruction())
+                .transferType("Ips")
+                .referenceID(null)
                 .beneficiary(beneficiary)
-                .purposeCode("0203")
+                .promoCode(EMPTY)
+                .myWUNumber(EMPTY)
                 .build();
 
         Response response = fundTransferSteps.transferFund(fundTransferData);

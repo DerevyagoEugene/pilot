@@ -2,9 +2,9 @@ package api.jira;
 
 public enum JiraStatus {
 
-    TO_DO("To Do", "11", 2),
-    IN_PROGRESS("In Progress", "21", 4),
-    DONE("Done", "31", 3);
+    BACKLOG("Backlog", "11", 2),
+    IN_PROGRESS("In Progress", "31", 4),
+    DONE("Done", "41", 3);
 
     private final String name;
     private final String id;

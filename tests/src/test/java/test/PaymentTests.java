@@ -25,13 +25,13 @@ import static org.testng.Assert.*;
 @Feature("[Positive-Functionality][SSC]")
 public class PaymentTests extends BaseTest {
 
-    private final PaymentSteps paymentSteps = new PaymentSteps();
-    private final CoreDBSteps dbSteps = new CoreDBSteps();
+    private final PaymentSteps paymentSteps = pico.getComponent(PaymentSteps.class);
+    private final CoreDBSteps dbSteps = pico.getComponent(CoreDBSteps.class);
 
     @Test(description = "[Get payment details]: Get payment details for actual 'payNo' and 'serviceId'")
     @Description("Get payment details for actual `payNo` and `serviceId`")
     @TmsLink("MS-13142")
-    @XrayId("10090")
+    @XrayId("10012")
     public void testGetPaymentDetailsPayNoServiceId() {
         Response paymentDetails = paymentSteps.getPaymentDetailsByServiceId("250000074899", "1");
         paymentSteps.checkResponsePaymentStructure(paymentDetails);
@@ -40,7 +40,7 @@ public class PaymentTests extends BaseTest {
     @Test(description = "[Check Payment Status]: Check payment status using 'payNo' and 'externalReference'")
     @Description("Check payment status using `payNo` and `externalReference`")
     @TmsLink("MS-13148")
-    @XrayId("10087")
+    @XrayId("10009")
     public void testGetPaymentDetailsPayNoExternalReference() {
         Response paymentDetails = paymentSteps.getPaymentDetailsByExternalReference(
                 "21720000000479",
@@ -52,7 +52,7 @@ public class PaymentTests extends BaseTest {
     @Test(description = "[Proxy Payment]: Submit payment for individual bill allow full due payment only")
     @Description("Submit payment for individual bill allow full due payment only")
     @TmsLink("MS-14583")
-    @XrayId("10086")
+    @XrayId("10008")
     public void testSubmitPaymentForIndividualBillAllowFullDuePaymentOnly() {
         String customerAccountNumber = "0010100014015102";
         String paymentNumber = "3510000000522";

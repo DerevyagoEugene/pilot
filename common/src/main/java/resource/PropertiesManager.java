@@ -27,10 +27,10 @@ public final class PropertiesManager {
                 inStream.close();
             } catch (IOException e) {
                 logger.error(e.getMessage());
-                throw new RuntimeException(e);
+                throw new IllegalStateException(e);
             }
         } else {
-            throw new RuntimeException(format("Resource \"%1$s\" could not be found", resourceName));
+            throw new IllegalStateException(format("Resource \"%1$s\" could not be found", resourceName));
         }
     }
 

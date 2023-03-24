@@ -18,13 +18,13 @@ import static org.apache.http.HttpStatus.SC_INTERNAL_SERVER_ERROR;
 @Feature("[Evoucher API][Positive Functionality]")
 public class EVoucherTests extends BaseTest {
 
-    private final EVoucherPurchaseSteps purchaseSteps = new EVoucherPurchaseSteps();
-    private final CommonSteps commonSteps = new CommonSteps();
+    private final EVoucherPurchaseSteps purchaseSteps = pico.getComponent(EVoucherPurchaseSteps.class);
+    private final CommonSteps commonSteps = pico.getComponent(CommonSteps.class);
 
     @Test(description = "[Positive Functionality] - Confirm eVoucher Purchase API")
     @Description("Request when flex date difference from current to check BAEFN_CALCULATE_SALES_TAX")
     @TmsLink("MS-15322")
-    @XrayId("10091")
+    @XrayId("10013")
     public void testRequestWhenFlexDateDifferenceFromCurrentToCheckBAEFN_CALCULATE_SALES_TAX() {
         Response previewResponse = purchaseSteps.requestPreviewEVoucherPayment();
         String orderId = JsonPath.read(previewResponse.getBody().asString(), "$.Tax.VoucherDetails.OrderId");

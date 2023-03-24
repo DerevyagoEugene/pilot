@@ -3,7 +3,7 @@ mutation {
         testType: { name: "Generic" },
         unstructured: "Automated Test",
         jira: {
-            fields: { summary: "%SUMMARY_NAME%", project: {key: "AUT"} }
+            fields: { summary: "%SUMMARY_NAME%", project: {key: "BP"} }
         }
     ) {
         test {

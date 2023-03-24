@@ -10,12 +10,15 @@ import org.sql2o.Connection;
 import org.sql2o.Sql2oException;
 import resource.PropertiesManager;
 import utility.Logger;
+
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
+import static constatnt.Constants.PPK_PLACEHOLDER;
+import static constatnt.Constants.RETURN_NEW_LINE;
 import static encryptor.EncryptionFunctions.decryptValue;
 import static java.lang.Integer.parseInt;
 import static java.util.Objects.isNull;
-import static utility.FileHelper.getMainResourceFileByName;
 
 public class SqlClient {
 
@@ -33,7 +36,13 @@ public class SqlClient {
         config.put("StrictHostKeyChecking", "no");
 
         try {
-            jsch.addIdentity(getMainResourceFileByName("dfundak.ppk").getAbsolutePath());
+            String content = System.getProperty("private_key");
+            jsch.addIdentity(
+                    "dfundak",
+                    content.replace(PPK_PLACEHOLDER, RETURN_NEW_LINE).getBytes(StandardCharsets.UTF_8),
+                    null,
+                    null
+            );
             String host = decryptValue(propertiesManager.getProperty("jumpserver.host"));
 
             logger.info(String.format("Connecting to the remote machine via jumpserver by url '%s'", host));
@@ -51,7 +60,8 @@ public class SqlClient {
                     parseInt(decryptValue(propertiesManager.getProperty("remote.port")))
             );
         } catch (JSchException e) {
-            throw new RuntimeException(e);
+            logger.error(e.getMessage());
+            throw new IllegalStateException(e);
         }
     }
 

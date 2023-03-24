@@ -29,10 +29,10 @@ public class FileFunctions {
             line = new String(Files.readAllBytes(Paths.get(filePath)));
         } catch (FileNotFoundException e) {
             logger.error(format("File was not found: %s", e.getMessage()));
-            throw new RuntimeException(e);
+            throw new IllegalStateException(e);
         } catch (IOException e) {
             logger.error(format("%nIO exception occurred during the conversion of the file '%s': %s", filePath, e.getMessage()));
-            throw new RuntimeException(e);
+            throw new IllegalStateException(e);
         }
         return line;
     }

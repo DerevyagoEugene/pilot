@@ -36,7 +36,8 @@ public class FileHelper {
         try {
             return get(FileHelper.class.getClassLoader().getResource("graphql/" + queryName).toURI()).toFile();
         } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
+            Logger.getInstance().error(e.getMessage());
+            throw new IllegalStateException(e);
         }
     }
 
@@ -52,7 +53,8 @@ public class FileHelper {
         try {
             return get(FileHelper.class.getClassLoader().getResource(fileName).toURI()).toFile();
         } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
+            Logger.getInstance().error(e.getMessage());
+            throw new IllegalStateException(e);
         }
     }
 }
