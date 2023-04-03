@@ -1,0 +1,19 @@
+mutation {
+    createTest(
+        testType: { name: "Generic" },
+        unstructured: "Automated Test",
+        jira: {
+            fields: { summary: "%SUMMARY_NAME%", project: {key: "BP"} }
+        }
+    ) {
+        test {
+            issueId
+            testType {
+                name
+            }
+            unstructured
+            jira(fields: ["key"])
+        }
+        warnings
+    }
+}

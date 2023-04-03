@@ -1,0 +1,8 @@
+/.idea/
+/common/common.iml
+/tests/tests.iml
+/automated-tests.iml
+*.ppk
+/common/target/
+/tests/target/
+/tests/.allure/

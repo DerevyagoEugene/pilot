@@ -1,0 +1,17 @@
+mutation {
+    createTestExecution(
+        testIssueIds: []
+        jira: {
+            fields: {
+                summary: "%SUMMARY_NAME%",
+                project: {key: "BP"}
+            }
+        }
+    ) {
+        testExecution {
+            issueId
+            jira(fields: ["key"])
+        }
+        warnings
+    }
+}

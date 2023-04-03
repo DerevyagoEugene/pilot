@@ -1,0 +1,17 @@
+mutation {
+    createTestPlan(
+        testIssueIds: []
+        jira: {
+            fields: {
+                summary: "%SUMMARY_NAME%",
+                project: {key: "BP"}
+            }
+        }
+    ) {
+        testPlan {
+            issueId
+            jira(fields: ["key"])
+        }
+        warnings
+    }
+}
